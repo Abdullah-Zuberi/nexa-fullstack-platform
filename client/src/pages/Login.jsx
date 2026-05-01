@@ -51,25 +51,21 @@ function Login() {
 
   const authenticateUser = async (e) => {
     e.preventDefault();
+    const data = {username: username,password: password};
     try {
-      const response = await api.get("users", { username: username });
-      const user = response.data[0];
-      if (user && user.website === password) {
-        if (rememberMe) {
-          setRememberedUsername(username);
-        } else {
-          clearRememberedUsername();
-        }
-
-        login(user);
-        navigate(`/users/${user.id}`, { replace: true });
+      const response = await api.post("auth/login", data );
+      const user = response.data.user;
+      if (rememberMe) {
+        setRememberedUsername(username);
       } else {
-        throw new Error("Invalid username or password");
+        clearRememberedUsername();
       }
+
+      login(user);
+      navigate(`/users/${user.id}`, { replace: true });
     } catch (error) {
-      setMessageError(
-        error.message || "Sign in failed - invalid username or password",
-      );
+      const errorMessage = error.response?.data?.message || "Sign in failed - invalid username or password";
+      setMessageError(errorMessage);
       setTimeout(() => {
         setMessageError("");
         setUsername("");
