@@ -52,16 +52,14 @@ function Register() {
     }
 
     try {
-      const response = await api.get('users', { username: username });
-      if (response.data.length > 0) {
-        throw new Error("Username already exists");
-      }
+      await api.post('auth/check-username', { username });
       navigate("/complete-profile", {
-        state: { username: username, password: password }
+        state: { username, password }
       });
 
     } catch (error) {
-      setMessageError(error.message || "Registration failed - please try again");
+      const errorMessage = error.response?.data?.message || error.message || "Registration failed - please try again";
+      setMessageError(errorMessage);
       setTimeout(() => {
         setMessageError("");
         setUsername("");

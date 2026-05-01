@@ -64,17 +64,29 @@ function CompleteProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!location.state?.username || !location.state?.password) {
+      setMessageError("Please create an account first, then complete your profile.");
+      return;
+    }
+
     try {
-      const response = await api.post("users", {
-        ...formData,
+      const response = await api.post("auth/register", {
         username: location.state.username,
-        website: location.state.password,
+        password: location.state.password,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        company: formData.company,
       });
-      const currentUser = { ...response.data, website: location.state.password };
-      login(currentUser);
-      navigate(`/users/${response.data.id}`, { replace: true });
+
+      const createdUser = response.data.user || response.data;
+      login(createdUser);
+      navigate(`/users/${createdUser.id}`, { replace: true });
     } catch (error) {
-      setMessageError("Error submitting form:" + error);
+      const errorMessage = error.response?.data?.message || error.message || "Error submitting form";
+      setMessageError(errorMessage);
     }
   };
 
