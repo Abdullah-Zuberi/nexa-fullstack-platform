@@ -1,6 +1,4 @@
-## `README.md` (Root Project README)
 
-````md
 # NEXA – Full-Stack Cloud-Based Social Platform
 
 ## Overview
@@ -80,7 +78,7 @@ React Frontend (Vercel)
 Express Backend Server
 ↓
 MySQL Cloud Database (Aiven)
-````
+
 
 ---
 
