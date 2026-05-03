@@ -210,8 +210,9 @@ This project was built to demonstrate:
 
 ## Author
 
-Developed by Avital Lugassi
-
+**Avital Lugassi**  
+- GitHub: https://github.com/AvitalLugassi  
+- LinkedIn: https://linkedin.com/in/avital-lugassi
 
 
 

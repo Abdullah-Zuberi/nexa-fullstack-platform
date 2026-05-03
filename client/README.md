@@ -35,7 +35,7 @@ https://nexa-fullstack-dashboard.vercel.app/
 
 The frontend follows a modular component-based architecture.
 
-```text
+```
 src/
 │
 ├── pages/
@@ -44,6 +44,7 @@ src/
 ├── context/
 ├── API/
 └── styles/
+```
 
 
 ---
@@ -165,5 +166,8 @@ The frontend was built to simulate a modern scalable React application integrate
 
 ## Author
 
-Developed by Avital Lugassi
+**Avital Lugassi**  
+- GitHub: https://github.com/AvitalLugassi  
+- LinkedIn: https://linkedin.com/in/avital-lugassi
+
 
