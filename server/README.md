@@ -1,4 +1,3 @@
-
 # NEXA Server
 
 ## Overview
@@ -291,4 +290,3 @@ npm start
 
 Developed by Avital Lugassi
 
-```

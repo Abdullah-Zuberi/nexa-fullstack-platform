@@ -1,5 +1,4 @@
 
-```md
 # NEXA Client – React Frontend
 
 ## Overview
@@ -45,7 +44,7 @@ src/
 ├── context/
 ├── API/
 └── styles/
-````
+
 
 ---
 
@@ -161,14 +160,10 @@ http://localhost:5173
 
 The frontend was built to simulate a modern scalable React application integrated with a production-style backend infrastructure and relational cloud database.
 
-````
-
 ---
 
 
 ## Author
 
 Developed by Avital Lugassi
-
-````
 

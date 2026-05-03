@@ -1,4 +1,3 @@
-
 # NEXA – Full-Stack Cloud-Based Social Platform
 
 ## Overview
@@ -70,7 +69,6 @@ Cloud-hosted MySQL using Aiven
 
 ## Full-Stack Architecture
 
-```text
 User Browser
 ↓
 React Frontend (Vercel)
@@ -128,12 +126,12 @@ MySQL Cloud Database (Aiven)
 
 ## Repository Structure
 
-```text
+
 project/
 │
 ├── client/   → React frontend
 └── server/   → Express + MySQL backend
-```
+
 
 Additional documentation:
 
@@ -214,6 +212,6 @@ This project was built to demonstrate:
 
 Developed by Avital Lugassi
 
-````
+
 
 
