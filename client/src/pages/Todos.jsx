@@ -104,7 +104,7 @@ function Todos() {
   return (
     <div className="todos-container">
       <div className="todos-header">
-        <h1 className="todos-title"><span class="nav-icon todos-icon"></span> My Todos</h1>
+        <h1 className="todos-title"><span className="nav-icon todos-icon"></span> My Todos</h1>
         <p className="todos-subtitle">Keep track of your tasks and goals</p>
       </div>
       {error && <AppError message={error} onRetry={loadTodos} />}

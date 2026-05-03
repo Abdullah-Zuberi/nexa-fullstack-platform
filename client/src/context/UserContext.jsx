@@ -16,14 +16,14 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (currentUser) {
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      localStorage.setItem('currentUser', JSON.stringify(currentUser),);
     } else {
       localStorage.removeItem('currentUser');
     }
     setIsLoading(false);
   }, [currentUser]);
 
-  const login = (userData) => setCurrentUser(userData);
+  const login = (userData) =>{console.log(userData,"User logged in"); setCurrentUser(userData);} 
 
   const logout = () => {
     setCurrentUser(null);

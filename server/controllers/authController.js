@@ -7,17 +7,17 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Username and password required" });
     }
 
-    const userData = await userModel.getUserWithPasswordByUsername(username);
-    if (!userData) {
+    const authData = await userModel.getUserWithPasswordByUsername(username);
+    if (!authData) {
       return res.status(404).json({ message: "User not found" });
     }
-    if (!userData.password || userData.password !== password) {
+    if (!authData.password || authData.password !== password) {
       return res.status(401).json({ message: "Invalid password" });
     }
-
+const useraData=await userModel.getUserById(authData.id);
     res.json({
       message: "Login successful",
-      user: userData,
+      user: useraData,
     });
   } catch (err) {
     console.log("SERVER ERROR:", err);

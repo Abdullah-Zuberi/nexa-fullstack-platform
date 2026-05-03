@@ -25,7 +25,6 @@ function Comments() {
 
   const { currentUser } = useUser();
   const [post, setPost] = useState(null);
-  const [hasShownError, setHasShownError] = useState(false);
 
   const addFields = [
     { name: "comment", label: "Comment", type: "text" }
@@ -33,23 +32,16 @@ function Comments() {
 
   const loadComments = async () => {
     try {
-      // First check if post belongs to current user
       const postResponse = await api.get("posts", { id: postId });
       const postData = postResponse.data[0];
-      
-      if (postData && String(postData.userId) !== String(currentUser?.id)) {
-        if (!hasShownError) {
-          setHasShownError(true);
-          navigate(`/users/${currentUser.id}/posts`);
-          setTimeout(() => {
-            showToast('You are not authorized to access this post.', 'error');
-          }, 100);
-          return;
-        }
+
+      if (!postData) {
+        setError('Post not found.');
+        return;
       }
-      
+
       setPost(postData);
-      
+
       const response = await api.get("comments", {
         postId: postId,
       });

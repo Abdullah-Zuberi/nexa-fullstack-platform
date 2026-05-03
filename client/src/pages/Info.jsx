@@ -62,15 +62,15 @@ function Info() {
                         <div className="block-fields">
                             <div className="field-row">
                                 <span className="field-label">City</span>
-                                <span className="field-value">{currentUser.address.city}</span>
+                                <span className="field-value">{currentUser.city}</span>
                             </div>
                             <div className="field-row">
                                 <span className="field-label">Street</span>
-                                <span className="field-value">{currentUser.address.street}, {currentUser.address.suite}</span>
+                                <span className="field-value">{currentUser.street}, {currentUser.suite}</span>
                             </div>
                             <div className="field-row">
                                 <span className="field-label">Zipcode</span>
-                                <span className="field-value zip-chip">{currentUser.address.zipcode}</span>
+                                <span className="field-value zip-chip">{currentUser.zipcode}</span>
                             </div>
                         </div>
                         <div className="block-deco" />
@@ -91,15 +91,15 @@ function Info() {
                         <div className="block-fields">
                             <div className="field-row">
                                 <span className="field-label">Name</span>
-                                <span className="field-value company-name">{currentUser.company.name}</span>
+                                <span className="field-value company-name">{currentUser.companyName}</span>
                             </div>
                             <div className="field-row">
                                 <span className="field-label">Catch Phrase</span>
-                                <span className="field-value catchphrase">"{currentUser.company.catchPhrase}"</span>
+                                <span className="field-value catchphrase">"{currentUser.catchPhrase}"</span>
                             </div>
                             <div className="field-row">
                                 <span className="field-label">Business</span>
-                                <span className="field-value">{currentUser.company.bs}</span>
+                                <span className="field-value">{currentUser.bs}</span>
                             </div>
                         </div>
                         <div className="block-deco comp-deco" />
