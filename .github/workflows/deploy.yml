@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,17 +18,30 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Frontend Dependencies
-        run: |
-          cd client
-          npm install
-
       - name: Build Frontend
         run: |
           cd client
+          npm install
           npm run build
 
-      - name: Deploy to EC2 via SSH
+      - name: Create Deployment Artifact
+        run: |
+          mkdir -p deploy_artifact
+          cp -r server deploy_artifact/
+          mkdir -p deploy_artifact/client
+          cp -r client/dist deploy_artifact/client/
+          tar -czf deployment.tar.gz -C deploy_artifact .
+
+      - name: Copy Artifact to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "deployment.tar.gz"
+          target: "/home/ubuntu/"
+
+      - name: Extract and Run on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -38,17 +51,17 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             
-            cd ~/nexa-fullstack-platform
-            git pull origin main
+            # Extract artifact over existing folder to preserve .env
+            mkdir -p ~/nexa-fullstack-platform
+            tar -xzf ~/deployment.tar.gz -C ~/nexa-fullstack-platform
             
             # Setup Server
-            cd server
-            npm install
+            cd ~/nexa-fullstack-platform/server
+            npm install --production
             pm2 restart nexa-server || pm2 start server.js --name nexa-server
             
             # Setup Client
-            cd ../client
-            npm install
-            npm run build
-            sudo cp -r dist/* /var/www/html/
-            sudo systemctl restart nginx
+            sudo cp -r ~/nexa-fullstack-platform/client/dist/* /var/www/html/
+            
+            # Cleanup artifact
+            rm ~/deployment.tar.gz
