@@ -14,7 +14,7 @@ The current version uses a real AWS managed database (Amazon RDS) providing pers
 
 ### Frontend & Backend API
 
-http://98.91.191.45/
+http://18.235.2.62/
 
 ### Database
 
